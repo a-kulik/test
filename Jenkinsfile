@@ -49,7 +49,7 @@ pipeline {
 
         stage("deploy") {
             when {
-                branch "release-1"
+                branch "release*"
             }
             agent {
                 dockerfile {
@@ -76,7 +76,7 @@ pipeline {
 
         stage("test-deployment") {
             when {
-                branch "release-1"
+                branch "release*"
             }
             steps {
                 script {
