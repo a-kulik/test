@@ -43,6 +43,7 @@ pipeline {
                     env["IMAGE"] = "${env.PROJ}:${env.BRANCH_NAME}.${env.BUILD_ID}"
                     def customImage = docker.build(env["IMAGE"])
                     sh "docker save -o deployment/${env["IMAGE"]}.tar ${env["IMAGE"]}"
+		    stash includes: "deployment/${env["IMAGE"]}.tar", name: 'demo-image'
                 }
             }
         }
@@ -60,6 +61,7 @@ pipeline {
             }
             steps {
                 script {
+		    unstash 'demo-image'
                     ansiblePlaybook(
                             playbook: 'deployment/deploy.yml',
                             inventory: 'deployment/inventory',
