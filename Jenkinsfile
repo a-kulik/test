@@ -97,7 +97,7 @@ pipeline {
 Build: ${currentBuild.displayName}
 Result: ${currentBuild.currentResult}
 """
-                mail body: body, subject: status, to: 'test@test.com'
+                mail body: body, subject: status, to: 'mymail.kulik@gmail.com'
             }
         }
     }
